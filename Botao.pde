@@ -1,14 +1,13 @@
 class Botao {
   float x, y, larg, alt;
-  float fill_hc;
-  float fill_sc = 50;
-  float fill_bc = 50;
-  float color_txt = 100;
+  color botton_fill = color(0, 0, 0, 1);
+  color botton_stroke = color(0, 0, 0, 1);
+  color txt_color = color(0, 0, 0);
+  
   String text = ""; 
   float x_text, y_text;
   int alin = CENTER;
   String img = "";
-  int Action;
   boolean hover, click;
   boolean border_b, fill_b = true, invisivel, travar;
   boolean ativado;
@@ -26,7 +25,7 @@ class Botao {
     this.text = text;
   }
 
-  void MostrarBotao() {
+  void Mostrar() {
     //int camada_ativa
     ConfiguracaoBotao();
     //camada_ativa == camadaif(){
@@ -34,10 +33,11 @@ class Botao {
     //}
   }
   void ConfiguracaoBotao() {
-    if (!invisivel) {
+   if (!invisivel) {
       if (img == "") {
         if (fill_b) {
-          fill(fill_hc, fill_sc, fill_bc);
+          fill(botton_fill);
+          stroke(botton_stroke);
           rect(x, y, larg, alt, 0);
         }
       } else {
@@ -54,16 +54,15 @@ class Botao {
       }
 
       textAlign(alin);
-      fill(0, 0, color_txt);
+      fill(txt_color);
       text(text, this.x+this.larg/2+x_text, this.y+this.alt/2+y_text);
     }
   }
 
-
   void DetectarBotao() {
     if (!travar) {
 
-      if (mouseX/0.5 >=x && mouseX/0.5<=x+larg&&mouseY/0.5>=y&&mouseY/0.5<=y+alt) {
+      if (mouseX>=x && mouseX<=x+larg&&mouseY>=y&&mouseY<=y+alt) {
         hover = true;
       } else {
         hover = false;
