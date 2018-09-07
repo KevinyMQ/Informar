@@ -1,45 +1,58 @@
 class Botao {
   float x, y, larg, alt;
-  color botton_fill = color(0, 0, 0, 1);
+  color fill = color(0, 0, 0, 1);
   color botton_stroke = color(0, 0, 0, 1);
   color txt_color = color(0, 0, 0);
   
   String text = ""; 
   float x_text, y_text;
   int alin = CENTER;
+  
+  MyImage img_obj;
   String img = "";
+
+  boolean invisivel, travar;
+
   boolean hover, click;
-  boolean border_b, fill_b = true, invisivel, travar;
   boolean ativado;
   boolean solto = true;
   boolean disparado, clicando;
-  MyImage img_obj;
+  
   int camada;
 
-  Botao(float x, float y, float larg, float alt, String img, String text) {
+  Botao(float x, float y, float larg, float alt, String img, String text, int camada) {
     this.img=img;
     this.x=x;
     this.y=y;
     this.larg=larg;
     this.alt=alt;
     this.text = text;
+    this.camada = camada;
   }
+  
+  
+  
 
-  void Mostrar() {
-    //int camada_ativa
+  void Mostrar(int camada_ativa) {
     ConfiguracaoBotao();
-    //camada_ativa == camadaif(){
+    if(camada_ativa <= camada){
     DetectarBotao();
-    //}
+    }
   }
+  
+  void txtConfigs(color txt_color, int alin, float x_text, float y_text){
+    this.txt_color = txt_color;
+    this.alin = alin;
+    this.x_text = x_text;
+    this.y_text = y_text;
+  }
+  
   void ConfiguracaoBotao() {
    if (!invisivel) {
       if (img == "") {
-        if (fill_b) {
-          fill(botton_fill);
+          fill(fill);
           stroke(botton_stroke);
           rect(x, y, larg, alt, 0);
-        }
       } else {
         img_obj = new MyImage(this.img);
         img_obj.local = "";
