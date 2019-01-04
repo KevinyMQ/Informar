@@ -12,13 +12,12 @@ class Botao {
   String img = "";
 
   boolean invisivel, travar;
-
-  boolean hover, click;
+  boolean focado;
+  boolean hover;
   boolean ativado;
-  boolean solto = true;
-  boolean disparado, clicando;
-  
+ 
   int camada;
+
 
   Botao(float x, float y, float larg, float alt, String img, String text, int camada) {
     this.img=img;
@@ -29,9 +28,7 @@ class Botao {
     this.text = text;
     this.camada = camada;
   }
-  
-  
-  
+
 
   void Mostrar(int camada_ativa) {
     ConfiguracaoBotao();
@@ -40,12 +37,14 @@ class Botao {
     }
   }
   
+  
   void txtConfigs(color txt_color, int alin, float x_text, float y_text){
     this.txt_color = txt_color;
     this.alin = alin;
     this.x_text = x_text;
     this.y_text = y_text;
   }
+  
   
   void ConfiguracaoBotao() {
    if (!invisivel) {
@@ -72,42 +71,35 @@ class Botao {
     }
   }
 
-  void DetectarBotao() {
-    if (!travar) {
 
+  void DetectarBotao() {
+   
+    if (!travar) {
       if (mouseX>=x && mouseX<=x+larg&&mouseY>=y&&mouseY<=y+alt) {
         hover = true;
       } else {
         hover = false;
       }
 
-      if (!hover) {
-        click = false;
+      if (!hover) { 
+        focado = false;
       }
-
-      if (clicando) {
-        if (solto) {
-          solto = false;
-          if (hover) {
-            click = true;
-          }
+      
+      if(disparado){
+        if(hover){
+          focado = true;
         }
       }
-      if (disparado) {  
-        if (click) {
-          ativado=true;
-          click=false;
+        
+      if(focado){
+        if(solto){
+          ativado = true;
+          focado = false;
         }
-        disparado=false;
-      }
-
-      if (mousePressed) {
-        clicando = true;
-      } else {
-        clicando = false;
-        disparado = true;
-        solto = true;
-      }
+      }    
     }
+    
   }
+  
+ 
 }
