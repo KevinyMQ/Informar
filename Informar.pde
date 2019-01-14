@@ -13,6 +13,7 @@ int camada_ativa;
 void setup(){  
   size(500,500);
   colorMode(HSB, 360, 100, 100, 100); //Definindo formato de edicao de cores
+  frameRate(60);
   btn = new Botao(100, 100, 100, 100, "", "Botão", 0);
   btn.fill = color(0,50,50);
   btn2 = new Botao(425, 20, 50, 50, "", "Botão", 1);
