@@ -32,12 +32,17 @@ class Dropmenu {
   if (animando) {
    Animar();
   }
-
-  if (principal.ativado) {
-   mostrando = !mostrando;
-   animando = true;
-   principal.ativado = false;
-  }
+  principal.func = new MyInterface(){
+     public void MyFunction() {
+     mostrando = !mostrando;
+     animando = true;
+   }
+  };
+  //if (principal.ativado) {
+  // mostrando = !mostrando;
+  // animando = true;
+  // principal.ativado = false;
+  //}
 
   principal.Mostrar(camada_ativa);
   principal.travar = animando;

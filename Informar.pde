@@ -10,6 +10,7 @@ boolean tela;
 
 int camada_ativa;
 
+
 void setup(){  
   size(500,500);
   colorMode(HSB, 360, 100, 100, 100); //Definindo formato de edicao de cores
@@ -17,7 +18,7 @@ void setup(){
   
   btn = new Botao(100, 100, 100, 100, "", "Botão", 0);
   btn.fill = color(0,50,50);
-  btn2 = new Botao(425, 20, 50, 50, "", "Botão", 1);
+  btn2 = new Botao(425, 20, 50, 50, "", "", 1);
   btn2.fill = color(0);
   
   btn3 = new Botao(0, 0, 300, 300, "", "Botão de camada", 1);
@@ -35,34 +36,18 @@ void setup(){
 
 void draw(){
   background(255);
-
   btn.Mostrar(camada_ativa);
-  btn2.Mostrar(camada_ativa);
   submenu();
+  btn2.Mostrar(camada_ativa);
   dropmenu.Mostrar(camada_ativa);
   
-  if(btn.ativado){
-    background(100);
-    btn.ativado = false;
-  }
-
-  if(btn2.ativado){
-    tela = true;
-    camada_ativa ++;
-    btn2.ativado = false;
-  }
-  
-  Mouse.disparado = false;
+  Functions();
+  Mouse.disparado = false; //Quando o último frame da rotação é chamado Mouse.disparado volta a ser falso
 }
 
 void submenu(){
   if(tela){
     btn3_back.Mostrar(camada_ativa);
     btn3.Mostrar(camada_ativa);
-    if(btn3_back.ativado){  
-      tela = false;
-      camada_ativa --;
-      btn3_back.ativado = false;
-    } 
   }
 }

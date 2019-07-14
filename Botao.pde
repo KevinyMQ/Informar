@@ -4,6 +4,8 @@ class Botao {
   color botton_stroke = color(0, 0, 0, 1);
   color txt_color = color(0, 0, 0);
   
+  
+  
   String text = ""; 
   float x_text, y_text;
   int alin = CENTER;
@@ -17,8 +19,10 @@ class Botao {
   boolean ativado;
  
   int camada;
+  
+  MyInterface func;
 
-  Botao(float x, float y, float larg, float alt, String img, String text, int camada) {
+  Botao(float x, float y, float larg, float alt, String img, final String text, int camada) {
     this.img=img;
     this.x=x;
     this.y=y;
@@ -26,6 +30,17 @@ class Botao {
     this.alt=alt;
     this.text = text;
     this.camada = camada;
+    
+    this.func = new MyInterface(){
+     public void MyFunction() {
+       if(text == ""){
+         print("Button Pressed\n");
+       }else{
+         print(text+" Pressed\n");
+       }
+     }
+    };
+    
   }
 
 
@@ -105,6 +120,11 @@ class Botao {
           focado = false;
         }
       }    
+    }
+
+    if(ativado == true){
+      func.MyFunction();
+      ativado = false;
     }
     
   }

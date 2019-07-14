@@ -18,3 +18,7 @@ void mouseMoved() {
   Mouse.x = mouseX;
   Mouse.y = mouseY;
 }
+void mouseDragged() {
+  Mouse.x = mouseX;
+  Mouse.y = mouseY;
+}
