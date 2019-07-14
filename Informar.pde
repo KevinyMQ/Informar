@@ -1,3 +1,4 @@
+
 Botao btn;
 Botao btn2;
 Botao btn3;
@@ -5,11 +6,13 @@ Botao btn3_back;
 
 Dropmenu dropmenu;
 
-boolean disparado, clicando;
-boolean solto = true;
+//boolean disparado, clicando;
+//boolean solto = true;
 boolean tela;
 
 int camada_ativa;
+
+
 
 void setup(){  
   size(500,500);
@@ -36,7 +39,7 @@ void setup(){
 
 void draw(){
   background(255);
-  
+
   btn.Mostrar(camada_ativa);
   btn2.Mostrar(camada_ativa);
   submenu();
@@ -53,7 +56,7 @@ void draw(){
     btn2.ativado = false;
   }
   
-  disparado = false;
+  Mouse.disparado = false;
 }
 
 void submenu(){
@@ -68,11 +71,12 @@ void submenu(){
   }
 }
 
-void mousePressed() {
-  disparado = true;
-  solto = false;
+ /* void mousePressed() {
+  print(Mouse.disparado);
+  Mouse.disparado = true;
+  Mouse.solto = false;
 }
 void mouseReleased(){
-  solto = true;
-  disparado = false;
-}
+  Mouse.solto = true;
+  Mouse.disparado = false;
+}*/

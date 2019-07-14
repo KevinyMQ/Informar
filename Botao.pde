@@ -93,14 +93,14 @@ class Botao {
         focado = false;
       }
       
-      if(disparado){
+      if(Mouse.disparado){
         if(hover){
           focado = true;
         }
       }
         
       if(focado){
-        if(solto){
+        if(Mouse.solto){
           ativado = true;
           focado = false;
         }
