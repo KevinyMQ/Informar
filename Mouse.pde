@@ -1,4 +1,5 @@
 static class Mouse{
+  static float x, y;
   static boolean disparado, clicando;
   static boolean solto = true;
 }
@@ -12,4 +13,8 @@ void mouseReleased(){
   Mouse.clicando = false;
   Mouse.solto = true;
   Mouse.disparado = false;
+}
+void mouseMoved() {
+  Mouse.x = mouseX;
+  Mouse.y = mouseY;
 }

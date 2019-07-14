@@ -6,13 +6,9 @@ Botao btn3_back;
 
 Dropmenu dropmenu;
 
-//boolean disparado, clicando;
-//boolean solto = true;
 boolean tela;
 
 int camada_ativa;
-
-
 
 void setup(){  
   size(500,500);
@@ -70,13 +66,3 @@ void submenu(){
     } 
   }
 }
-
- /* void mousePressed() {
-  print(Mouse.disparado);
-  Mouse.disparado = true;
-  Mouse.solto = false;
-}
-void mouseReleased(){
-  Mouse.solto = true;
-  Mouse.disparado = false;
-}*/

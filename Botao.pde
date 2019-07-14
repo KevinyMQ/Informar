@@ -76,13 +76,13 @@ class Botao {
     
     if (!travar) {
       if(invertido == false){
-        if (mouseX>=x && mouseX<=x+larg&&mouseY>=y&&mouseY<=y+alt) {
+        if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
           hover = true;
         } else {
           hover = false;
         }
       }else{
-        if (mouseX>=x && mouseX<=x+larg&&mouseY>=y&&mouseY<=y+alt) {
+        if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
           hover = false;
         } else {
           hover = true;
