@@ -8,6 +8,7 @@ class Botao {
   
   String text = ""; 
   float x_text, y_text;
+  int fontSize;
   int alin = CENTER;
   
   MyImage img_obj;
@@ -17,7 +18,7 @@ class Botao {
   boolean focado;
   boolean hover;
   boolean ativado;
- 
+  
   int camada;
   
   MyInterface func;
@@ -29,6 +30,7 @@ class Botao {
     this.larg=larg;
     this.alt=alt;
     this.text = text;
+    this.fontSize = 12;
     this.camada = camada;
     
     this.func = new MyInterface(){
@@ -44,7 +46,7 @@ class Botao {
   }
 
 
-  void Mostrar(int camada_ativa) {
+  void Mostrar(int camada_ativa) {                         
     ConfiguracaoBotao();
     if(camada_ativa <= camada){
       DetectarBotao();
@@ -80,9 +82,10 @@ class Botao {
         img_obj.mostrar();
       }
 
-      textAlign(alin);
+      textAlign(alin,CENTER);
       fill(txt_color);
-      text(text, this.x+this.larg/2+x_text, this.y+this.alt/2+y_text);
+      textSize(fontSize);
+      text(text, this.x+this.larg/2+x_text, this.y+this.alt/2+y_text-fontSize/6);
     }
   }
 
@@ -90,21 +93,21 @@ class Botao {
   void DetectarBotao() {
     
     if (!travar) {
-      if(invertido == false){
-        if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
-          hover = true;
-        } else {
-          hover = false;
+        if(invertido == false){
+          if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
+            hover = true;
+          } else {
+            hover = false;
+          }
+        }else{
+          if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
+            hover = false;
+          } else {
+            hover = true;
+          }
         }
-      }else{
-        if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
-          hover = false;
-        } else {
-          hover = true;
-        }
-      }
-
-      if (!hover) { 
+    
+      if (!hover) {
         focado = false;
       }
       
@@ -119,7 +122,7 @@ class Botao {
           ativado = true;
           focado = false;
         }
-      }    
+      }
     }
 
     if(ativado == true){
