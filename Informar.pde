@@ -19,6 +19,11 @@ int camada_ativa;
 void setup(){
   size(500,500);
   colorMode(HSB, 360, 100, 100, 100); //Definindo formato de edicao de cores
+  
+  PFont font = createFont("font.ttf", 14); //Fonte  
+  textFont(font); //Definindo fonte do programa usando variável anteriormente criada e inicializada
+  text("", 0, 0); //Pré-carregando buffer de texto
+  
   frameRate(60);
   
   btn = new Botao(100, 100, 100, 100, "", "Botão", 0);
