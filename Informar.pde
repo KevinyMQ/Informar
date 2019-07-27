@@ -1,4 +1,4 @@
-
+  
 int Tela_Ativa = -1; //Tela inicial ativa
 int camada_ativa;
 
