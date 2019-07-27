@@ -13,7 +13,7 @@ void setup(){
   frameRate(60);
   
   SettingLogoScreenVars();
-
+  SettingMainMenuScreenVars();
 }
 
 void draw(){
@@ -22,7 +22,7 @@ void draw(){
   if(Tela_Ativa == -1){
     MostrarLogoScreen();
   }else if(Tela_Ativa == 0){
-  
+    MostrarMainMenuScreen();
   }else if(Tela_Ativa == 1){
   
   }
