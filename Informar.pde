@@ -2,6 +2,9 @@
 int Tela_Ativa = -1; //Tela inicial ativa
 int camada_ativa;
 
+Estado estado_selecionado;
+Porto porto_selecionado;
+
 void setup(){
   size(382, 567); //Definindo tamanho da tela
   colorMode(HSB, 360, 100, 100, 100); //Definindo formato de edicao de cores
@@ -11,7 +14,10 @@ void setup(){
   text("", 0, 0); //Pré-carregando buffer de texto
   
   frameRate(60);
+  WriteValores();
   
+  estado_selecionado = estado.get(3);
+  porto_selecionado = estado_selecionado.porto.get(0);
   SettingLogoScreenVars();
   SettingMainMenuScreenVars();
 }

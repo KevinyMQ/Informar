@@ -85,6 +85,7 @@ class Botao {
       textAlign(alin,CENTER);
       fill(txt_color);
       textSize(fontSize);
+      textLeading(12);
       text(text, this.x+this.larg/2+x_text, this.y+this.alt/2+y_text-fontSize/6);
     }
   }
