@@ -40,6 +40,14 @@ class Mes{
       dia.add(new Dia(i));
     }
   }
+  
+  int[] getDays(){
+      int[] days = new int[dia.size()];
+    for(int i = 0; i < dia.size(); i++){
+      days[i] = dia.get(i).dia;
+    }
+    return days;
+  }
 
 }
 
@@ -61,4 +69,13 @@ class Hora{
     this.hora = hora;
   }
   
+}
+
+//Functions
+String[] convertArrayIntToString(int[] original){
+  String[] converted = new String[original.length];
+  for(int i = 0; i < original.length; i++){
+    converted[i] = Integer.toString(original[i]);
+  }
+  return converted;
 }

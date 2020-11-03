@@ -1,5 +1,5 @@
   
-int Tela_Ativa = -1; //Tela inicial ativa
+int Tela_Ativa = 1; //Tela inicial ativa
 int camada_ativa;
 
 Estado estado_selecionado;
@@ -20,6 +20,7 @@ void setup(){
   porto_selecionado = estado_selecionado.porto.get(0);
   SettingLogoScreenVars();
   SettingMainMenuScreenVars();
+  SettingMainScreenVars();
 }
 
 void draw(){
@@ -30,7 +31,7 @@ void draw(){
   }else if(Tela_Ativa == 0){
     MostrarMainMenuScreen();
   }else if(Tela_Ativa == 1){
-  
+    MostrarMainScreen();
   }
 
   Functions();
