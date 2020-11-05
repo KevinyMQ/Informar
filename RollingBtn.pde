@@ -28,7 +28,9 @@ class RollingBtn {
   Botao next_btn;
   
   Botao[] btn = new Botao[MAX];
-
+  color btnsStroke = color(0,0,0);
+  color btnsFill = color(0,50,50);
+  color btnsTxtColor = color(0,0,0);
   boolean arrastando;
   
     RollingBtn(float x, float y, float larg, float alt, int selectedBtn, float btnPxScale, int camada, boolean rotationMode, String[] list){
@@ -54,8 +56,8 @@ class RollingBtn {
          initialP = x + larg/2 - btnPxScale/2; 
          for(int i = 0; i < totalBtns; i++){
              btn[i] = new Botao(initialP, y, btnPxScale, alt, "", list[i], camada);
-             btn[i].fill = color(0,50,50);
-             btn[i].botton_stroke = color(0,0,0);
+             btn[i].fill = btnsFill;
+             btn[i].botton_stroke = btnsStroke;
          }
        }else{
          base_btn = new Botao(x, y+btnPxScale, larg, alt-btnPxScale*2, "", "", camada);
@@ -64,8 +66,8 @@ class RollingBtn {
          initialP = y + alt/2 - btnPxScale/2; 
          for(int i = 0; i < totalBtns; i++){
              btn[i] = new Botao(x, initialP, larg, btnPxScale, "", list[i], camada);
-             btn[i].fill = color(0,50,50);
-             btn[i].botton_stroke = color(0,0,0);
+             btn[i].fill = btnsFill;
+             btn[i].botton_stroke = btnsStroke;
          }
        }
        
@@ -138,7 +140,7 @@ class RollingBtn {
       arrastando = false;
     }
     
-      if(arrastando == true){
+    if(arrastando == true){
       if(rotationMode == false){
         varianceP = Mouse.clickedX - Mouse.x;
       }else{
@@ -157,7 +159,13 @@ class RollingBtn {
    }
   
   }
-  
+  void updateBtnsStyle(){
+    for(int i = 0; i < totalBtns; i++){
+      btn[i].fill = btnsFill;
+      btn[i].botton_stroke = btnsStroke;
+      btn[i].txt_color = btnsTxtColor;
+    }
+  }
   void Snap(){
     mappedP = selectedBtn;
   }
@@ -174,5 +182,6 @@ class RollingBtn {
       mappedP = selectedBtn;
       }
   }
+   
   
 }

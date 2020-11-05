@@ -37,7 +37,7 @@ class Mes{
   Mes(String name, int dias){
     this.name = name;
     for(int i = 0; i < dias; i++){
-      dia.add(new Dia(i));
+      dia.add(new Dia(i+1));
     }
   }
   
