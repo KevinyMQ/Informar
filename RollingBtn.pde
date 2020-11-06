@@ -8,6 +8,7 @@ class RollingBtn {
   int totalBtns;
   int selectedBtn;
   
+  int fontNormalSize = 12;
   int fontExpand = 20;
   
   float btnPxScale;
@@ -30,6 +31,8 @@ class RollingBtn {
   Botao[] btn = new Botao[MAX];
   color btnsStroke = color(0,0,0);
   color btnsFill = color(0,50,50);
+  color btnsHighLight = color(0,50,50);
+  float fontScale = 1;
   color btnsTxtColor = color(0,0,0);
   boolean arrastando;
   
@@ -58,6 +61,7 @@ class RollingBtn {
              btn[i] = new Botao(initialP, y, btnPxScale, alt, "", list[i], camada);
              btn[i].fill = btnsFill;
              btn[i].botton_stroke = btnsStroke;
+             
          }
        }else{
          base_btn = new Botao(x, y+btnPxScale, larg, alt-btnPxScale*2, "", "", camada);
@@ -68,6 +72,8 @@ class RollingBtn {
              btn[i] = new Botao(x, initialP, larg, btnPxScale, "", list[i], camada);
              btn[i].fill = btnsFill;
              btn[i].botton_stroke = btnsStroke;
+             fontNormalSize = 11;
+             fontExpand = 16;
          }
        }
        
@@ -116,8 +122,10 @@ class RollingBtn {
               
               if(i == selectedBtn-1){
                 this.btn[i].fontSize = fontExpand;
+                this.btn[i].fill = btnsHighLight;
               }else{
-                this.btn[i].fontSize = 12;
+                this.btn[i].fontSize = fontNormalSize;
+                this.btn[i].fill = btnsFill;
               }
               
             }

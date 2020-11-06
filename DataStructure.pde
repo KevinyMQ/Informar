@@ -150,3 +150,10 @@ int[] getOnlyYearArray(Ano[] ano){
   }
   return anoNumber;
 }
+String[] toUpperCaseArray(String[] str){
+  String[] upr = new String[str.length];
+  for(int i = 0; i < str.length; i++){
+    upr[i] = str[i].toUpperCase();
+  }
+  return upr;   
+}

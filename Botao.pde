@@ -67,6 +67,7 @@ class Botao {
    if (!invisivel) {
       if (img == "") {
           fill(fill);
+          strokeWeight(1);
           stroke(botton_stroke);
           rect(x, y, larg, alt, 0);
       } else {
