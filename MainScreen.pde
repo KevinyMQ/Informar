@@ -9,7 +9,10 @@ MyImage arco; //Arco da tela principal
 /*Dados*/
 Ano[] ano = new Ano[10];
 Mes[] mes = new Mes[12];
-
+int year;
+int month;
+int day;
+int totalDaysMonth;
 RollingBtn diasBtn; //Botão deslizante dos dias
 Botao tglCallender; //Botão que abre o calendário
 int daySelected; //Variável auxiliar do botão dia selecionado
@@ -33,11 +36,12 @@ void SettingMainScreenVars(){
   arco = new MyImage("data/images/arco.png"); //Definindo arquivo do arco da tela principal
   arco.y = 100;
   
-  mes[0] = new Mes("Janeiro", 30); //Declarando array do mes de Janeiro para testes
+  mes[0] = new Mes("Janeiro", 31); //Declarando array do mes de Janeiro para testes
   
   for(int i = 0; i < ano.length; i++){
     ano[i] = new Ano(2011+i); 
   }
+  /*Isso é duplicado no draw pra atualizar quando uma nova data é selecionada no calendário*/
   diasBtn = new RollingBtn(0, 0, width, 36, 1, 50, 0, false, convertArrayIntToString(mes[0].getDays())); //Inicializando valores no botão deslizante do slider de dias
   diasBtn.base_btn.botton_stroke = color(0,0,100);
   diasBtn.base_btn.fill = color(0,0,100);
@@ -54,7 +58,12 @@ void SettingMainScreenVars(){
   diasBtn.btnsTxtColor = color(198,58,64);
   diasBtn.btnsHighLight = color(200,5,95);
   diasBtn.updateBtnsStyle();
-
+  //diasBtn.btn[30].dinamicHide = true;
+  diasBtn.func = new MyInterface(){
+     public void MyFunction() {
+       //updateDateVars();
+   }
+  };
   
   mesesBtn = new RollingBtn(width/2 - 130, 90, 120, 160, 1, 30, 1, true, toUpperCaseArray(getMonthNames())); //Inicializando valores no botão deslizante do slider de meses
   mesesBtn.base_btn.fill = color(0,0,100);
@@ -68,6 +77,12 @@ void SettingMainScreenVars(){
   mesesBtn.fontScale = 0.5;
   mesesBtn.btnsHighLight = color(200,5,95);
   mesesBtn.updateBtnsStyle();
+  mesesBtn.func = new MyInterface(){
+   public void MyFunction() {
+     updateDateVars();
+     UpdateDays();    
+   }
+  };
   
   anosBtn = new RollingBtn(width/2 + 10, 90, 120, 160, 1, 30, 1, true, convertArrayIntToString(getOnlyYearArray(ano))); //Inicializando valores no botão deslizante do slider de anos
   anosBtn.base_btn.fill = color(0,0,100);
@@ -81,8 +96,14 @@ void SettingMainScreenVars(){
   anosBtn.fontScale = 0.5;
   anosBtn.btnsHighLight = color(200,5,95);
   anosBtn.updateBtnsStyle();
-
-  tglCallender = new Botao(0, diasBtn.base_btn.alt+4, width, 26, "", "", 0); //Inicializando botão calendário
+  anosBtn.func = new MyInterface(){
+   public void MyFunction() {
+     updateDateVars();
+     UpdateDays();    
+   }
+  };
+  
+  tglCallender = new Botao(0, 36+4, width, 26, "", "", 0); //Inicializando botão calendário
   tglCallender.fill = color(0,0,100);  
   calenderContainer = new Botao(0, tglCallender.y + tglCallender.alt+4, width, 202, "", "", 1); //Inicializando container invertido do calendário
   calenderContainer.fill = color(0,0,100);
@@ -91,16 +112,29 @@ void SettingMainScreenVars(){
   tglCallender.func = new MyInterface(){ //Adicionando a função ao botão que abre o calendário
      public void MyFunction() {
         showingCallendar = !showingCallendar;
+
      }
   };
   calenderContainer.func = new MyInterface(){ //Adicionando a função ao botão que fecha o calendário
      public void MyFunction() {
         showingCallendar = false;
      }
-  };
-  
+  }; 
 }
 
+void UpdateDays(){
+  
+  print("Ano: "+year+"\n");
+  print("Mes: "+month+"\n");
+  print("Dia: "+day+"\n");
+  print("N dias do mes: "+totalDaysMonth+"\n");
+  if(day > totalDaysMonth){
+    day = totalDaysMonth;
+    diasBtn.Snap(day);  
+  }
+  
+  diasBtn.totalBtns = totalDaysMonth;
+}
 void MostrarMainScreen(){
   daySelected = diasBtn.selectedBtn-1;
   backg_ceu_claro_main.mostrar();
@@ -117,6 +151,8 @@ void MostrarMainScreen(){
   diasBtnsDetail();
   
   toggleCalendar();
+  
+  //updateDateVars();
 }
 
 
@@ -141,4 +177,11 @@ void toggleCalendar(){ //Montando o bloco do calendário
     tglCallender.fill = color(0, 0, 100);
     camada_ativa = 0;
   }
+}
+
+void updateDateVars(){
+  year = ano[anosBtn.selectedBtn-1].ano;
+  month = mesesBtn.selectedBtn;
+  day = diasBtn.selectedBtn;
+  totalDaysMonth = ano[year-2011].mes[month-1].dias;
 }

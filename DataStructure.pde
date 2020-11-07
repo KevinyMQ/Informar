@@ -30,6 +30,7 @@ class Ano{
      mes[i] = new Mes(i+1);
    }
    if(ano % 4 == 0){
+     mes[1].dias = 29;
      mes[1].dia.add(new Dia(29));
    }
  }

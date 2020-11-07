@@ -7,6 +7,7 @@ class RollingBtn {
   
   int totalBtns;
   int selectedBtn;
+  int auxSelectedBtn;
   
   int fontNormalSize = 12;
   int fontExpand = 20;
@@ -36,6 +37,9 @@ class RollingBtn {
   color btnsTxtColor = color(0,0,0);
   boolean arrastando;
   
+  MyInterface func;
+
+  
     RollingBtn(float x, float y, float larg, float alt, int selectedBtn, float btnPxScale, int camada, boolean rotationMode, String[] list){
       
        this.x = x;
@@ -43,7 +47,7 @@ class RollingBtn {
       
        this.totalBtns = list.length;
        this.selectedBtn = selectedBtn;
-       
+       this.auxSelectedBtn = selectedBtn;
        mappedP = selectedBtn;
        fixedP = mappedP;
        
@@ -59,10 +63,9 @@ class RollingBtn {
          initialP = x + larg/2 - btnPxScale/2; 
          for(int i = 0; i < totalBtns; i++){
              btn[i] = new Botao(initialP, y, btnPxScale, alt, "", list[i], camada);
+             btn[i].travar = true;
              btn[i].fill = btnsFill;
-             btn[i].botton_stroke = btnsStroke;
-             
-         }
+             btn[i].botton_stroke = btnsStroke;         }
        }else{
          base_btn = new Botao(x, y+btnPxScale, larg, alt-btnPxScale*2, "", "", camada);
          back_btn = new Botao(x, y, larg, btnPxScale, "", "Back", camada);
@@ -70,6 +73,7 @@ class RollingBtn {
          initialP = y + alt/2 - btnPxScale/2; 
          for(int i = 0; i < totalBtns; i++){
              btn[i] = new Botao(x, initialP, larg, btnPxScale, "", list[i], camada);
+             btn[i].travar = true;
              btn[i].fill = btnsFill;
              btn[i].botton_stroke = btnsStroke;
              fontNormalSize = 11;
@@ -96,6 +100,12 @@ class RollingBtn {
              IncrementSelectedBtn();
          }
        };
+
+     this.func = new MyInterface(){
+     public void MyFunction() {
+         print("Rolling Button Switched\n");
+     }
+    };
 
   }
   
@@ -162,7 +172,11 @@ class RollingBtn {
       }
     }
    if(Mouse.soltado){
-     Snap();
+     Snap(selectedBtn);
+     if(auxSelectedBtn != selectedBtn){
+       func.MyFunction();
+       auxSelectedBtn = selectedBtn;
+     }
      fixedP = mappedP;
    }
   
@@ -174,7 +188,8 @@ class RollingBtn {
       btn[i].txt_color = btnsTxtColor;
     }
   }
-  void Snap(){
+  void Snap(int selectedBtn){
+    this.selectedBtn = selectedBtn;
     mappedP = selectedBtn;
   }
   

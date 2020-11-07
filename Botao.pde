@@ -14,6 +14,7 @@ class Botao {
   MyImage img_obj;
   String img = "";
   boolean invertido;
+  boolean dinamicHide;
   boolean invisivel, travar;
   boolean focado;
   boolean hover;
@@ -46,13 +47,15 @@ class Botao {
   }
 
 
-  void Mostrar(int camada_ativa) {                         
-    ConfiguracaoBotao();
-    if(camada_ativa <= camada){
-      DetectarBotao();
-    }else{
-      hover = false;
-      focado = false;
+  void Mostrar(int camada_ativa) {
+    if(!dinamicHide){
+      ConfiguracaoBotao();
+      if(camada_ativa <= camada){
+        DetectarBotao();
+      }else{
+        hover = false;
+        focado = false;
+      }
     }
   }
   
