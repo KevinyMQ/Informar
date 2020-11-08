@@ -42,7 +42,7 @@ void SettingMainScreenVars(){
     ano[i] = new Ano(2011+i); 
   }
 
-  diasBtn = new RollingBtn(0, 0, width, 36, 1, 50, 0, false, convertArrayIntToString(mes[0].getDays())); //Inicializando valores no botão deslizante do slider de dias
+  diasBtn = new RollingBtn(0, 0, width, 36, 1, 50, 1, false, convertArrayIntToString(mes[0].getDays())); //Inicializando valores no botão deslizante do slider de dias
   diasBtn.base_btn.botton_stroke = color(0,0,100);
   diasBtn.base_btn.fill = color(0,0,100);
   diasBtn.back_btn.botton_stroke = color(0,0,100);
@@ -63,7 +63,7 @@ void SettingMainScreenVars(){
        UpdateDateVars();
      }
   };
-  
+
   mesesBtn = new RollingBtn(width/2 - 130, 90, 120, 160, 1, 30, 1, true, toUpperCaseArray(getMonthNames())); //Inicializando valores no botão deslizante do slider de meses
   mesesBtn.base_btn.fill = color(0,0,100);
   mesesBtn.back_btn.fill = color(198,58,64);
@@ -110,15 +110,16 @@ void SettingMainScreenVars(){
   
   tglCallender.func = new MyInterface(){ //Adicionando a função ao botão que abre o calendário
      public void MyFunction() {
-        showingCallendar = !showingCallendar;
-
+        showingCallendar = true;
      }
   };
   calenderContainer.func = new MyInterface(){ //Adicionando a função ao botão que fecha o calendário
      public void MyFunction() {
+       if(!diasBtn.base_btn.focado && !diasBtn.hover){
         showingCallendar = false;
+        }
      }
-  }; 
+  };
   UpdateDateVars();
 }
 
@@ -136,7 +137,6 @@ void MostrarMainScreen(){
   fill(198,58,64);
   rect(0, tglCallender.y + tglCallender.alt, width, 5);
   diasBtnsDetail();
-  
   toggleCalendar();
   
   //Block rolling over the invisible buttons

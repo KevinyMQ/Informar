@@ -5,6 +5,8 @@ class RollingBtn {
   float x,y;
   float larg,alt;
   
+  boolean hover;
+
   int totalBtns;
   int selectedBtn;
   int auxSelectedBtn;
@@ -44,7 +46,9 @@ class RollingBtn {
       
        this.x = x;
        this.y = y;
-      
+       this.larg = larg;
+       this.alt = alt;
+       
        this.totalBtns = list.length;
        this.selectedBtn = selectedBtn;
        this.auxSelectedBtn = selectedBtn;
@@ -115,7 +119,11 @@ class RollingBtn {
   }
   
   void Mostrar(int camada_ativa){
-    
+             if (Mouse.x>=x && Mouse.x<=x+larg&&Mouse.y>=y&&Mouse.y<=y+alt) {
+              hover = true;
+            } else {
+              hover = false;
+            }
     base_btn.Mostrar(camada_ativa);
  
     selectedBtn = round( mappedP);
@@ -143,6 +151,7 @@ class RollingBtn {
               }
               
             }
+
             
     back_btn.Mostrar(camada_ativa);
     next_btn.Mostrar(camada_ativa);
@@ -151,7 +160,7 @@ class RollingBtn {
   
   void Mexendo(int camada_ativa){
     
-    if(base_btn.camada <= camada_ativa){
+    if(camada_ativa <= base_btn.camada){
        if(base_btn.hover){
         if(Mouse.disparado){
             arrastando = true;
