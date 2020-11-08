@@ -41,7 +41,7 @@ void SettingMainScreenVars(){
   for(int i = 0; i < ano.length; i++){
     ano[i] = new Ano(2011+i); 
   }
-  /*Isso é duplicado no draw pra atualizar quando uma nova data é selecionada no calendário*/
+
   diasBtn = new RollingBtn(0, 0, width, 36, 1, 50, 0, false, convertArrayIntToString(mes[0].getDays())); //Inicializando valores no botão deslizante do slider de dias
   diasBtn.base_btn.botton_stroke = color(0,0,100);
   diasBtn.base_btn.fill = color(0,0,100);
@@ -58,11 +58,10 @@ void SettingMainScreenVars(){
   diasBtn.btnsTxtColor = color(198,58,64);
   diasBtn.btnsHighLight = color(200,5,95);
   diasBtn.updateBtnsStyle();
-  //diasBtn.btn[30].dinamicHide = true;
   diasBtn.func = new MyInterface(){
      public void MyFunction() {
-       //updateDateVars();
-   }
+       UpdateDateVars();
+     }
   };
   
   mesesBtn = new RollingBtn(width/2 - 130, 90, 120, 160, 1, 30, 1, true, toUpperCaseArray(getMonthNames())); //Inicializando valores no botão deslizante do slider de meses
@@ -79,7 +78,7 @@ void SettingMainScreenVars(){
   mesesBtn.updateBtnsStyle();
   mesesBtn.func = new MyInterface(){
    public void MyFunction() {
-     updateDateVars();
+     UpdateDateVars();
      UpdateDays();    
    }
   };
@@ -98,7 +97,7 @@ void SettingMainScreenVars(){
   anosBtn.updateBtnsStyle();
   anosBtn.func = new MyInterface(){
    public void MyFunction() {
-     updateDateVars();
+     UpdateDateVars();
      UpdateDays();    
    }
   };
@@ -120,21 +119,9 @@ void SettingMainScreenVars(){
         showingCallendar = false;
      }
   }; 
+  UpdateDateVars();
 }
 
-void UpdateDays(){
-  
-  print("Ano: "+year+"\n");
-  print("Mes: "+month+"\n");
-  print("Dia: "+day+"\n");
-  print("N dias do mes: "+totalDaysMonth+"\n");
-  if(day > totalDaysMonth){
-    day = totalDaysMonth;
-    diasBtn.Snap(day);  
-  }
-  
-  diasBtn.totalBtns = totalDaysMonth;
-}
 void MostrarMainScreen(){
   daySelected = diasBtn.selectedBtn-1;
   backg_ceu_claro_main.mostrar();
@@ -152,7 +139,12 @@ void MostrarMainScreen(){
   
   toggleCalendar();
   
-  //updateDateVars();
+  //Block rolling over the invisible buttons
+  if(diasBtn.mappedP > diasBtn.totalBtns-(31-ano[year-2011].mes[month-1].dias) || day > diasBtn.totalBtns-(31-ano[year-2011].mes[month-1].dias)){
+      diasBtn.Snap(totalDaysMonth);
+      day = diasBtn.selectedBtn;
+      //diasBtn.mappedP = diasBtn.totalBtns-(31-ano[year-2011].mes[month-1].dias);
+   }
 }
 
 
@@ -179,9 +171,29 @@ void toggleCalendar(){ //Montando o bloco do calendário
   }
 }
 
-void updateDateVars(){
+
+void UpdateDays(){
+  for(int i = 0; i < 31; i++){
+    if(i < totalDaysMonth){
+      diasBtn.btn[i].invisivel = false;
+    }else{
+      diasBtn.btn[i].invisivel = true;
+    }
+  }
+}
+
+void UpdateDateVars(){
   year = ano[anosBtn.selectedBtn-1].ano;
   month = mesesBtn.selectedBtn;
-  day = diasBtn.selectedBtn;
   totalDaysMonth = ano[year-2011].mes[month-1].dias;
+  if(day > totalDaysMonth){
+    day = totalDaysMonth;
+  }else{
+    day = diasBtn.selectedBtn;
+  }
+  print("Ano: "+year+"\n");
+  print("Mes: "+month+"\n");
+  print("Dia: "+day+"\n");
+  print("Dias do meses: "+totalDaysMonth+"\n");
+  print("-------- \n");
 }

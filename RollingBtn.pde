@@ -65,7 +65,8 @@ class RollingBtn {
              btn[i] = new Botao(initialP, y, btnPxScale, alt, "", list[i], camada);
              btn[i].travar = true;
              btn[i].fill = btnsFill;
-             btn[i].botton_stroke = btnsStroke;         }
+             btn[i].botton_stroke = btnsStroke;         
+         }
        }else{
          base_btn = new Botao(x, y+btnPxScale, larg, alt-btnPxScale*2, "", "", camada);
          back_btn = new Botao(x, y, larg, btnPxScale, "", "Back", camada);
@@ -80,7 +81,11 @@ class RollingBtn {
              fontExpand = 16;
          }
        }
-       
+        base_btn.func = new MyInterface(){
+           public void MyFunction() {
+             //Clear print
+           }
+        };
        
        base_btn.botton_stroke = color(0,0,0);
        back_btn.botton_stroke = color(0,0,0);
@@ -122,7 +127,6 @@ class RollingBtn {
                      btn[i].Mostrar(camada_ativa);
                 }
                 btn[i].x = btn[i].larg*i+realP;
-              
               }else{
                 if(btn[i].y > y && btn[i].y < base_btn.y+base_btn.alt){
                      btn[i].Mostrar(camada_ativa);
