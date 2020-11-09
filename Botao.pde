@@ -1,6 +1,6 @@
 class Botao {
   float x, y, larg, alt;
-  color fill = color(0, 0, 0, 1);
+  color fill = color(50, 50, 50, 100);
   color botton_stroke = color(0, 0, 0, 1);
   color txt_color = color(0, 0, 0);
   

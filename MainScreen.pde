@@ -22,6 +22,10 @@ boolean showingCallendar; //Boleana que guarda se o calendário vai ser mostrado
 RollingBtn mesesBtn; //Botão deslizante dos meses
 RollingBtn anosBtn; //Botão deslizante dos anos
 
+Dropmenu dropMenu; //Botão das opções extras
+
+
+
 
 void SettingMainScreenVars(){
  //Variáveis da tela principal
@@ -120,6 +124,22 @@ void SettingMainScreenVars(){
         }
      }
   };
+  
+  dropMenu = new Dropmenu(width-80, height-136, 64, 64, "data/images/bigStar.png", "", 3, 0); //Initializing dropbutton
+  dropMenu.btn_subdrop[0].img = "data/images/star01.png";
+  dropMenu.btn_subdrop[0].text = "Opção 01";
+  dropMenu.btn_subdrop[0].txtConfigs(color(0,0,100), RIGHT, -26, -4);
+  dropMenu.btn_subdrop[0].fontSize = 14;
+  dropMenu.btn_subdrop[1].img = "data/images/star02.png";
+  dropMenu.btn_subdrop[1].text = "Opção 02";
+  dropMenu.btn_subdrop[1].txtConfigs(color(0,0,100), RIGHT, -26, -4);
+  dropMenu.btn_subdrop[1].fontSize = 14;
+  dropMenu.btn_subdrop[2].img = "data/images/star03.png";
+  dropMenu.btn_subdrop[2].text = "Opção 03";
+  dropMenu.btn_subdrop[2].txtConfigs(color(0,0,100), RIGHT, -26, -4);
+  dropMenu.btn_subdrop[2].fontSize = 14;
+  
+  
   UpdateDateVars();
 }
 
@@ -145,6 +165,9 @@ void MostrarMainScreen(){
       day = diasBtn.selectedBtn;
       //diasBtn.mappedP = diasBtn.totalBtns-(31-ano[year-2011].mes[month-1].dias);
    }
+   
+   dropMenu.Mostrar(camada_ativa);
+   
 }
 
 

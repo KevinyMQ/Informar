@@ -15,7 +15,7 @@ class Dropmenu {
   this.n_btn = n_btn;
   principal = new Botao(x, y, larg, alt, img, text, camada);
   for (int i = 0; i < n_btn; i++) {
-   btn_subdrop[i] = new Botao(x, y, 40, 40, "", "0" + (i + 1), camada);
+   btn_subdrop[i] = new Botao(x+larg-40, y, 40, 40, "", "0" + (i + 1), camada);
   }
  }
 
